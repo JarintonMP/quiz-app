@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import AppRouter from "./routes";
+import { RouterProvider } from "@tanstack/react-router";
+import { router } from "./routes";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AppRouter />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );

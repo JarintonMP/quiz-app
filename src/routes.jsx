@@ -1,32 +1,23 @@
 import {
   createRouter,
-  RouterProvider,
   createRoute,
   createRootRoute,
-  Link,
   Outlet,
+  Link,
 } from "@tanstack/react-router";
 
 import QuizComponent from "./components/QuizComponent";
-import SaludoComponent from "./components/SaludoComponent";
 import PokemonComponent from "./components/PokemonComponent";
+import SaludoComponent from "./components/SaludoComponent";
 
-// 🔹 Layout principal (MENÚ)
+// 🔹 Layout global
 function Layout() {
   return (
     <div>
       <nav style={{ marginBottom: "20px" }}>
-        <Link to="/" style={{ margin: "10px" }}>
-          Quiz
-        </Link>
-
-        <Link to="/pokemon" style={{ margin: "10px" }}>
-          Pokemon
-        </Link>
-
-        <Link to="/saludo" style={{ margin: "10px" }}>
-          Saludo
-        </Link>
+        <Link to="/" style={{ marginRight: "10px" }}>Quiz</Link>
+        <Link to="/pokemon" style={{ marginRight: "10px" }}>Pokemon</Link>
+        <Link to="/saludo">Saludo</Link>
       </nav>
 
       <Outlet />
@@ -34,11 +25,12 @@ function Layout() {
   );
 }
 
-//  Rutas
+// 🔹 Root
 const rootRoute = createRootRoute({
   component: Layout,
 });
 
+// 🔹 Rutas
 const quizRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
@@ -57,17 +49,12 @@ const saludoRoute = createRoute({
   component: SaludoComponent,
 });
 
-// Árbol de rutas
+// 🔹 Árbol
 const routeTree = rootRoute.addChildren([
   quizRoute,
   pokemonRoute,
   saludoRoute,
 ]);
 
-const router = createRouter({
-  routeTree,
-});
-
-export default function AppRouter() {
-  return <RouterProvider router={router} />;
-}
+// 🔹 EXPORT CLAVE
+export const router = createRouter({ routeTree });
